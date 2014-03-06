@@ -31,15 +31,13 @@ Permite solicitar una lista completa de las rutas disponibles
 `http://wheels.comoj.com/api/trips.php?userId=1&time=1600`
 
 _Parámetros Opcionales_
-- time 			
-_Permite filtrar por la hora del viaje. Retorna todos los viajes a partir de ese momento. En formato militar, concatenando los 4 dígitos de la hora en un número en formato HHMM._
-- hashtag 
-_Permite filtrar por publicaciones que contengan el/los hashtags pedidos._
-	`valor` un hashtag para filtrar, no debe llevar el carácter #
-	`valor1,[..],valorN` filtro AND de los valores dados separados por coma
+- `time` _Permite filtrar por la hora del viaje. Retorna todos los viajes a partir de ese momento. En formato militar, concatenando los 4 dígitos de la hora en un número en formato HHMM._
+- `hashtag` _Permite filtrar por publicaciones que contengan el/los hashtags pedidos._
+	- `valor` un hashtag para filtrar, no debe llevar el carácter #
+	- `valor1,[..],valorN` filtro AND de los valores dados separados por coma
 
-date fecha en que se están pidiendo los viajes, restringido a uno o dos días.
-‘today’ el día actual según el horario del servidor
-	‘tomorrow’ el día siguiente según horario del servidor
-	‘both’ los viajes para el día actual y el siguiente
-	‘AAAA/MM/DD’ especificar una fecha en específico en el orden de MySQL
+- `date` _fecha en que se están pidiendo los viajes, restringido a uno o dos días._
+	- `today` el día actual según el horario del servidor
+	- `tomorrow` el día siguiente según horario del servidor
+	- `both` los viajes para el día actual y el siguiente
+	- `AAAA/MM/DD` especificar una fecha en específico en el orden de MySQL
