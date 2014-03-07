@@ -31,7 +31,7 @@ Permite solicitar una lista completa de las rutas disponibles
 `http://wheels.comoj.com/api/trips.php?userId=1&time=1600`
 
 _Parámetros Opcionales_
-- `time` _Permite filtrar por la hora del viaje. Retorna todos los viajes a partir de ese momento. En formato militar, concatenando los 4 dígitos de la hora en un número en formato HHMM._
+- `time` _Permite filtrar por la hora del viaje. Retorna todos los viajes a partir de ese momento. En formato militar, concatenando los 4 dígitos de la hora en un número en formato_ `HHMM`.
 - `hashtag` _Permite filtrar por publicaciones que contengan el/los hashtags pedidos._
 	- `valor` un hashtag para filtrar, no debe llevar el carácter #
 	- `valor1,[..],valorN` filtro AND de los valores dados separados por coma

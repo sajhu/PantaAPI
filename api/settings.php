@@ -6,22 +6,37 @@ include "driver.class.php";
 include "trip.class.php";
 include "responseTrips.class.php";
 
-	define("MYSQL_NAME", "a2030194_wheels");
-	define("MYSQL_USER", "a2030194_wheels");
-	define("MYSQL_PASS", "labredesML340");
-	define("MYSQL_HOST", "mysql5.000webhost.com");
-
+	// -- Configuraciones de Entorno
 
 	global $DB;
 	mb_internal_encoding("UTF-8");
+	error_reporting(E_ALL ^ E_NOTICE);
 
-	$DB = new MySQL(MYSQL_NAME, MYSQL_USER, MYSQL_PASS, MYSQL_HOST);
+	// -- Acceso MySQL
+
+	define("MYSQL_NAME", "panta");
+	define("MYSQL_USER", "root");
+	define("MYSQL_PASS", "");
+	define("MYSQL_HOST", "localhost");
+
+
+	// -- URLs
+
+	define("RELATIVE_URL", "/panta/api/");
+	define("ABSOLUTE_URL", "http://localhost/panta/api/");
+
+	define('ACTUAL_URL', $_SERVER['PHP_SELF']); // Don't edit this one
+
+	define("PICS_URL", "http://localhost/panta/fotos/");
 
 	
-	
+	// -- Tablas MySQL
+
 	define("TABLA_VIAJES", "viaje");
 	define("TABLA_USUARIOS", "usuario");
 	
+
+	// -- Códigos de Estado
 
 	define("RESPONSE_OK", 0);
 	define("RESPONSE_EMPTY", 1);
@@ -35,9 +50,13 @@ include "responseTrips.class.php";
 	
 	define("PROBLEM_PUBLISHING", 200);
 	define("ERROR_VALIDATING", 201);
-	
 
-	// AUTENTICACIÓN DE USUARIOS
+
+	// -- Conexión a la DB
+
+	$DB = new MySQL(MYSQL_NAME, MYSQL_USER, MYSQL_PASS, MYSQL_HOST);
+
+	// AUTENTICACIÓN DE USUARIOS debe ir en otro lado
 	$idUsuario = get("userId");
 		if(!$idUsuario || $idUsuario == "")
 			error(AUTH_REQUIRED);
