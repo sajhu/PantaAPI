@@ -68,7 +68,7 @@ include "settings.php";
 	$array = $DB->ExecuteSQL($query);
 	$numViajes = $DB->records;
 
-	var_dump($DB);
+	//var_dump($DB);
 
 
 	if($DB->lastError != null)
@@ -103,7 +103,7 @@ include "settings.php";
 		$foto = $viaje['foto'];
 		$telefono = $viaje['telefono'];
 
-		$driver = new Driver($codigo, $nombre, $foto, $telefono);
+		$driver = new Driver($codigo, $nombre, PICS_URL.$foto, $telefono);
 
 		$trip->setDriver($driver);
 
