@@ -23,7 +23,7 @@ include "responseTrips.class.php";
 	// -- URLs
 
 	define("RELATIVE_URL", "/panta/api/");
-	define("ABSOLUTE_URL", "http://localhost/panta/api/");
+	define("ABSOLUTE_URL", "http://localhost/PantaAPI/api/");
 
 	define('ACTUAL_URL', $_SERVER['PHP_SELF']); // Don't edit this one
 
@@ -54,7 +54,7 @@ include "responseTrips.class.php";
 
 	// -- Conexión a la DB
 
-	$DB = new MySQL(MYSQL_NAME, MYSQL_USER, MYSQL_PASS, MYSQL_HOST);
+	$DB = new MySQL(MYSQL_NAME, MYSQL_USER, MYSQL_PASS, MYSQL_HOST) or error(SERVER_ERROR);
 
 	// AUTENTICACIÓN DE USUARIOS debe ir en otro lado
 	$idUsuario = get("userId");
