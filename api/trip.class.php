@@ -19,7 +19,7 @@ class Trip {
 	
 	}
 
-	public function setDriver(Driver $driver)
+	public function setDriver(User $driver)
 	{
 		$this->driver = $driver;
 	}

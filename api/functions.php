@@ -1,6 +1,35 @@
 <?php
 
 
+	function auth($mail, $secret, $db)
+	{
+		$parts = explode(":", $secret);
+
+		$hash = $parts[0];
+
+		$salt = $parts[1];
+
+		return checkUser($mail, $hash, $salt, $db);
+	}
+
+	function checkUser($mail, $hash, $salt, $db)
+	{
+		$usuario = $db->Select(TABLA_USUARIOS, array("correo" => $mail), '', 1);
+
+
+		if(!$usuario || $db->records != 1)
+			return false;
+
+		$clave = $usuario['clave'];
+
+		$salted = $clave . ":" . $salt;
+
+		$generated = md5($salted);
+
+
+		return $hash == $generated;
+
+	}
 	
 		/**
 	 * Sanitizes any input string agaist SQLInjections and XSS
@@ -46,7 +75,7 @@
 	function sendMail($fromEmail, $toEmail, $subject, $message, $fromName = '', $toName = '')
 	{
 		try {
-			include_once(PHP_FOLDER.'Mailer.php');
+			include_once(LIB_FOLDER.'Mailer.php');
 
 			// minimal requirements to be set
 			$Mailer = new Mailer();

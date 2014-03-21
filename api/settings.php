@@ -1,8 +1,10 @@
 <?php
+
+include "credentials.php";
 include "functions.php";
-include "MySQL.php";
+include "lib/MySQL.php";
 include "error.class.php";
-include "driver.class.php";
+include "user.class.php";
 include "trip.class.php";
 include "responseTrips.class.php";
 
@@ -14,10 +16,9 @@ include "responseTrips.class.php";
 
 	// -- Acceso MySQL
 
-	define("MYSQL_NAME", "panta");
-	define("MYSQL_USER", "root");
-	define("MYSQL_PASS", "");
-	define("MYSQL_HOST", "localhost");
+
+	define("TRIPS_LIMIT", "30");
+	define("REQUIRE_AUTH", true);
 
 
 	// -- URLs
@@ -30,10 +31,7 @@ include "responseTrips.class.php";
 	define("PICS_URL", "http://localhost/panta/fotos/");
 
 	
-	// -- Tablas MySQL
-
-	define("TABLA_VIAJES", "viaje");
-	define("TABLA_USUARIOS", "usuario");
+	define("LIB_FOLDER", "lib/");
 	
 
 	// -- Códigos de Estado
@@ -54,12 +52,17 @@ include "responseTrips.class.php";
 
 	// -- Conexión a la DB
 
-	$DB = new MySQL(MYSQL_NAME, MYSQL_USER, MYSQL_PASS, MYSQL_HOST) or error(SERVER_ERROR);
+	$DB = new MySQL(MYSQL_NAME, MYSQL_USER, MYSQL_PASS, MYSQL_HOST) or error(SERVER_ERROR, $DB->lastError);
 
 	// AUTENTICACIÓN DE USUARIOS debe ir en otro lado
-	$idUsuario = get("userId");
-		if(!$idUsuario || $idUsuario == "")
-			error(AUTH_REQUIRED);
+	$idUsuario = get("userId") or error(AUTH_REQUIRED);
+	$passUsuario = get("userSecret");
+
+	$valid = auth($userId, $passUsuario, $DB);
+	echo $valid;
+
+	if((REQUIRE_AUTH && !$valid))
+		error(AUTH_FAILED);
 		
 
 ?>

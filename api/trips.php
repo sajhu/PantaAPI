@@ -10,7 +10,7 @@ include "settings.php";
 // ---------------------------
 
 
-
+	
 	// POR DEFECTO
 
 	$hora = date('Hi'); // hora militar sin puntos
@@ -64,7 +64,7 @@ include "settings.php";
 
 	$query = substr($query, 0, -3);
 
-	$query .= " ORDER BY hora";
+	$query .= " ORDER BY hora LIMIT ".TRIPS_LIMIT;
 	$array = $DB->ExecuteSQL($query);
 	$numViajes = $DB->records;
 
@@ -100,10 +100,11 @@ include "settings.php";
 
 		$codigo = $viaje['codigo'];
 		$nombre = $viaje['nombre'];
+		$apellido = $viaje['apellido'];
 		$foto = $viaje['foto'];
 		$telefono = $viaje['telefono'];
 
-		$driver = new Driver($codigo, $nombre, PICS_URL.$foto, $telefono);
+		$driver = new Driver($codigo, $nombre, $apellido, PICS_URL.$foto, $telefono);
 
 		$trip->setDriver($driver);
 
