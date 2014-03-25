@@ -3,10 +3,12 @@
 
 class TestCase
 {
-	const TEST_TRUE 		= 0;
-	const TEST_FALSE 		= 1;
-	const TEST_EQUALS 		= 2;
-	const TEST_NOT_EQUALS 	= 3;
+	const TEST_TRUE 			= 0;
+	const TEST_FALSE 			= 1;
+	const TEST_EQUALS 			= 2;
+	const TEST_NOT_EQUALS 		= 3;
+	const TEST_POSITIVE 		= 4;
+	const TEST_NOT_POSITIVE 	= 5;
 
 	var $id;
 	var $name;
@@ -42,6 +44,12 @@ class TestCase
 				break;
 			case self::TEST_FALSE:
 				echo $this->testFalse($this->name, $result);
+				break;
+			case self::TEST_POSITIVE:
+				echo $this->testPositive($this->name, $result);
+				break;
+			case self::TEST_NOT_POSITIVE:
+				echo $this->testNotPositive($this->name, $result);
 				break;			
 			default:
 				echo $this->printResult($this->name, $result);
@@ -71,11 +79,33 @@ class TestCase
 				break;			
 			case self::TEST_NOT_EQUALS:
 				return "Not Equals";
+				break;				
+			case self::TEST_POSITIVE:
+				return "Positive Integer";
+				break;				
+			case self::TEST_NOT_POSITIVE:
+				return "Non Positive Integer";
 				break;			
 			default:
 				return "No name";
 				break;
 		}
+	}
+
+	function testPositive($test, $int)
+	{
+		if($int > 0)
+			return "	{$test} <span style='color:green;font-weight:bold;font-size: 20px'>OK</span> <br>";
+		else
+			return "	{$test} <span style='color:red;font-weight:bold;font-size: 20px'>FAILED</span> <br>";
+	}
+
+	function testNotPositive($test, $int)
+	{
+		if($int < 0 || !$int)
+			return "	{$test} <span style='color:green;font-weight:bold;font-size: 20px'>OK</span> <br>";
+		else
+			return "	{$test} <span style='color:red;font-weight:bold;font-size: 20px'>FAILED</span> <br>";
 	}
 
 	function testTrue($test, $passed)

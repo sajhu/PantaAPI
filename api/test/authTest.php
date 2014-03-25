@@ -23,7 +23,7 @@ include "testCase.php";
 
 		$passwords = array("123456789", "mexico", "mexico", "123456789", "sdf");
 
-		$types = array(TestCase::TEST_TRUE, TestCase::TEST_TRUE, TestCase::TEST_FALSE, TestCase::TEST_FALSE, TestCase::TEST_FALSE);
+		$types = array(TestCase::TEST_POSITIVE, TestCase::TEST_POSITIVE, TestCase::TEST_NOT_POSITIVE, TestCase::TEST_NOT_POSITIVE, TestCase::TEST_NOT_POSITIVE);
 
 		$test = new TestCase(0, "MySQL Connection", TestCase::TEST_TRUE);
 		try {
@@ -52,7 +52,7 @@ include "testCase.php";
 
 		$fin = microtime();
 
-		echo "TIEMPO TOTAL: <span style='font-size: 20px'>" . ($fin - $inicio) . "s</span>";
+		echo "TIEMPO TOTAL: <span style='font-size: 20px'>" . ($fin - $inicio) . "s";
 		echo "</pre>";
 	}
 
@@ -77,7 +77,7 @@ include "testCase.php";
 	}
 
 
-	function generateRandomString($length = 20) {
+	function generateRandomString($length = 32) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_';
     $randomString = '';
     for ($i = 0; $i < $length; $i++) {

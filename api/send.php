@@ -56,9 +56,9 @@ include "settings.php";
 		if($pfecha == 'today')
 			$fecha = "CURDATE( )";
 		elseif ($pfecha == 'tomorrow')
-			$fecha = date('Y-m-d', strtotime(' +1 day'));
-		//elseif ($pfecha == 'both')  ESTO SE SOPORTA EN DAR LISTA DE VIAJES
-		//	error(NOT_SUPPORTED);
+			$fecha = "DATE_ADD(NOW(), INTERVAL 1 DAY)";
+		elseif ($pfecha == 'both') // ESTO SE SOPORTA EN DAR LISTA DE VIAJES
+			error(NOT_SUPPORTED);
 		//elseif ($pfecha) mira el patron de fecha yyyy/mm/dd
 		else
 			error(ERROR_VALIDATING);
@@ -73,13 +73,12 @@ include "settings.php";
 // CONSULTA SQL
 // ---------------------------
 
-	$sql = 'INSERT INTO `'.TABLA_VIAJES.'` (`id`, `descripcion`, `fecha`, `hora`, `sillas`, `id_conductor`) 
-	VALUES (NULL, \''.$descripcion.'\', '.$fecha.', \''.$hora.'\', \''.$sillas.'\', \''.$idUsuario.'\');';
+	$sql = 'INSERT INTO `'.TABLA_VIAJES.'` (`id`, `descripcion`, `fecha`, `hora`, `sillas`, `id_conductor`) VALUES (NULL, \''.$descripcion.'\', '.$fecha.', \''.$hora.'\', \''.$sillas.'\', \''.$codigo	.'\');';
 
 	
 	$DB->ExecuteSQL($sql);
 
-//var_dump($DB);
+var_dump($DB);
 
 	error(0); // acaba bien
 ?>

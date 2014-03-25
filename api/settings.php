@@ -39,12 +39,13 @@ include "responseTrips.class.php";
 	define("RESPONSE_OK", 0);
 	define("RESPONSE_EMPTY", 1);
 	
-	define("AUTH_REQUIRED", 100);
-	define("AUTH_FAILED", 101);
-	define("MISSING_PARAMS", 102);
-	define("NO_UTF8", 103);
-	define("NOT_SUPPORTED", 104);
-	define("SERVER_ERROR", 105);
+	define("AUTH_SUCCESS", 100);
+	define("AUTH_REQUIRED", 101);
+	define("AUTH_FAILED", 102);
+	define("MISSING_PARAMS", 103);
+	define("NO_UTF8", 104);
+	define("NOT_SUPPORTED", 105);
+	define("SERVER_ERROR", 106);
 	
 	define("PROBLEM_PUBLISHING", 200);
 	define("ERROR_VALIDATING", 201);
@@ -55,14 +56,7 @@ include "responseTrips.class.php";
 	$DB = new MySQL(MYSQL_NAME, MYSQL_USER, MYSQL_PASS, MYSQL_HOST) or error(SERVER_ERROR, $DB->lastError);
 
 	// AUTENTICACIÓN DE USUARIOS debe ir en otro lado
-	$idUsuario = get("userId") or error(AUTH_REQUIRED);
-	$passUsuario = get("userSecret");
+	include "auth.php";
 
-	$valid = auth($userId, $passUsuario, $DB);
-	echo $valid;
-
-	if((REQUIRE_AUTH && !$valid))
-		error(AUTH_FAILED);
-		
 
 ?>

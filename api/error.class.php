@@ -14,6 +14,7 @@ class Error {
 		$this->nombres = array(
 			RESPONSE_OK => "solicitud correcta",
 			RESPONSE_EMPTY => "resultado vacio",
+			AUTH_SUCCESS => "credenciales validas",
 			AUTH_REQUIRED => "autorizacion requerida para acceder a este recurso",
 			AUTH_FAILED => "error de autenticacion",
 			MISSING_PARAMS => "faltan parametros",

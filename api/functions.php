@@ -27,7 +27,7 @@
 		$generated = md5($salted);
 
 
-		return $hash == $generated;
+		return ($hash == $generated) ? $usuario['codigo'] : -1;
 
 	}
 	

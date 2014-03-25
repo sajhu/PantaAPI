@@ -53,8 +53,8 @@ include "settings.php";
 // ---------------------------
 
 
-	$query = "SELECT * FROM `".TABLA_VIAJES."`, `".TABLA_USUARIOS."` 
-	WHERE `viaje`.`id_conductor` = `usuario`.`codigo` AND `fecha` = CURDATE() AND";
+	$query = "SELECT * FROM `".TABLA_VIAJES."`, `".TABLA_USUARIOS."` WHERE `viaje`.`id_conductor` = `usuario`.`codigo` 
+	AND `fecha` >= CURDATE() AND";
 
 	foreach ($hashtags as $hashtag)
 		$query .= " `descripcion` LIKE '%#".$hashtag."%' AND";
@@ -67,8 +67,6 @@ include "settings.php";
 	$query .= " ORDER BY hora LIMIT ".TRIPS_LIMIT;
 	$array = $DB->ExecuteSQL($query);
 	$numViajes = $DB->records;
-
-	//var_dump($DB);
 
 
 	if($DB->lastError != null)
@@ -104,7 +102,7 @@ include "settings.php";
 		$foto = $viaje['foto'];
 		$telefono = $viaje['telefono'];
 
-		$driver = new Driver($codigo, $nombre, $apellido, PICS_URL.$foto, $telefono);
+		$driver = new User($codigo, $nombre, $apellido, PICS_URL.$foto, $telefono);
 
 		$trip->setDriver($driver);
 
