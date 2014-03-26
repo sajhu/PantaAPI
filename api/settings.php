@@ -51,6 +51,12 @@ include "responseTrips.class.php";
 	define("ERROR_VALIDATING", 201);
 
 
+	// -- Códigos tipos de favoritos
+
+	define("USER_FAVORITE", 0);
+	define("HASHTAG_FAVORITE", 1);
+
+
 	// -- Conexión a la DB
 
 	$DB = new MySQL(MYSQL_NAME, MYSQL_USER, MYSQL_PASS, MYSQL_HOST) or error(SERVER_ERROR, $DB->lastError);
