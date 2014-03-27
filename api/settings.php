@@ -26,7 +26,7 @@ include "responseTrips.class.php";
 	define("RELATIVE_URL", "/panta/api/");
 	define("ABSOLUTE_URL", "http://localhost/PantaAPI/api/");
 
-	define('ACTUAL_URL', $_SERVER['PHP_SELF']); // Don't edit this one
+	define('ACTUAL_URL', $_SERVER['REQUEST_URI']); // Don't edit this one
 
 	define("PICS_URL", "http://localhost/panta/fotos/");
 
@@ -61,7 +61,7 @@ include "responseTrips.class.php";
 
 	$DB = new MySQL(MYSQL_NAME, MYSQL_USER, MYSQL_PASS, MYSQL_HOST) or error(SERVER_ERROR, $DB->lastError);
 
-	// AUTENTICACIÓN DE USUARIOS debe ir en otro lado
+	// AUTENTICACIÓN DE USUARIOS 
 	include "auth.php";
 
 

@@ -2,16 +2,22 @@
 
 include_once "settings.php";
 
-	$userId = get('userId') or error(MISSING_PARAMS);
-	$userSecret = get('userSecret') or error(MISSING_PARAMS);
 
+	if (REQUIRE_AUTH) 
+	{
 
-	$codigo = auth($userId, $userSecret, $DB);
+		$userId = get('userId') or error(MISSING_PARAMS);
+		$userSecret = get('userSecret') or error(MISSING_PARAMS);
 
-	
-	if(REQUIRE_AUTH && $valid < 0)
-		error(AUTH_FAILED);
-	else if(get('auth'))
+		$codigo = auth($userId, $userSecret, $DB);
+
+		if($codigo  == -1)	
+			error(AUTH_FAILED);
+	}
+
+	if(get('auth'))
 		error(AUTH_SUCCESS);
+	
+
 
 ?>

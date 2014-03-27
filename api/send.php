@@ -78,7 +78,7 @@ include "settings.php";
 	
 	$DB->ExecuteSQL($sql);
 
-var_dump($DB);
+//var_dump($DB);
 
 	error(0); // acaba bien
 ?>
