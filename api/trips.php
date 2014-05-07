@@ -90,11 +90,12 @@ include "settings.php";
 	{
 		$viajeId = $viaje['id'];
 		$descripcion = $viaje['descripcion'];
+		$to = $viaje['destino'];
 		$fecha = $viaje['fecha'];
 		$hora = $viaje['hora'];
 		$sillas = $viaje['sillas'];
 
-		$trip = new Trip($viajeId, $descripcion, $fecha, $hora, $sillas);
+		$trip = new Trip($viajeId, $descripcion, $to, $fecha, $hora, $sillas);
 
 		$codigo = $viaje['codigo'];
 		$nombre = $viaje['nombre'];

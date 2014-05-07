@@ -14,16 +14,21 @@ include "settings.php";
 // DEFINICIÓN DE CAMPOS
 // ---------------------------
 
-// CAMPOS OBLIGATORIOS
+	// CAMPOS OBLIGATORIOS
 
 	$descripcion = get("description");
+
+	$to = get("to");
 
 	$hora = get("time"); 
 
 	if(!$descripcion || $descripcion == "")
 		error(MISSING_PARAMS, 'description'); // muere
 
-	elseif(!$hora || $hora == "" )
+	else if($to === false || $to == "")
+		error(MISSING_PARAMS, 'to');
+
+	else if(!$hora || $hora == "")
 		error(MISSING_PARAMS, 'time'); // muere
 
 
@@ -49,15 +54,22 @@ include "settings.php";
 
 	if (strlen($hora) != 4)
 		error(ERROR_VALIDATING);
-		
 	
+
+	if($to != DESTINATION_UNIANDES && $to != DESTINATION_HOME)
+	{
+		var_dump($_GET);
+				error(ERROR_VALIDATING, 'destination param \'to\'');
+
+	}
+
 	if($usaFecha)
 	{
 		if($pfecha == 'today')
 			$fecha = "CURDATE( )";
 		elseif ($pfecha == 'tomorrow')
 			$fecha = "DATE_ADD(NOW(), INTERVAL 1 DAY)";
-		elseif ($pfecha == 'both') // ESTO SE SOPORTA EN DAR LISTA DE VIAJES
+		elseif ($pfecha == 'both') // ESTO SE SOPORTA EN DAR LISTA DE VIAJES, NO PUBLICAR
 			error(NOT_SUPPORTED);
 		//elseif ($pfecha) mira el patron de fecha yyyy/mm/dd
 		else
@@ -73,12 +85,12 @@ include "settings.php";
 // CONSULTA SQL
 // ---------------------------
 
-	$sql = 'INSERT INTO `'.TABLA_VIAJES.'` (`id`, `descripcion`, `fecha`, `hora`, `sillas`, `id_conductor`) VALUES (NULL, \''.$descripcion.'\', '.$fecha.', \''.$hora.'\', \''.$sillas.'\', \''.$codigo	.'\');';
+	$sql = 'INSERT INTO `'.TABLA_VIAJES.'` (`id`, `descripcion`, `fecha`, `hora`, `sillas`, `id_conductor`, `destino`) VALUES (NULL, \''.$descripcion.'\', '.$fecha.', \''.$hora.'\', \''.$sillas.'\', \''.$codigo.'\', \''.$to.'\');';
 
 	
-	$DB->ExecuteSQL($sql);
+	$DB->ExecuteSQL($sql) or error(PROBLEM_PUBLISHING, $DB->lastError);
 
 //var_dump($DB);
 
-	error(0); // acaba bien
+	error(RESPONSE_OK); // acaba bien
 ?>

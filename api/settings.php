@@ -23,12 +23,9 @@ include "responseTrips.class.php";
 
 	// -- URLs
 
-	define("RELATIVE_URL", "/panta/api/");
-	define("ABSOLUTE_URL", "http://localhost/PantaAPI/api/");
+
 
 	define('ACTUAL_URL', $_SERVER['REQUEST_URI']); // Don't edit this one
-
-	define("PICS_URL", "http://localhost/panta/fotos/");
 
 	
 	define("LIB_FOLDER", "lib/");
@@ -56,6 +53,11 @@ include "responseTrips.class.php";
 	define("USER_FAVORITE", 0);
 	define("HASHTAG_FAVORITE", 1);
 
+
+	// -- Códigos
+
+	define("DESTINATION_UNIANDES", 0);
+	define("DESTINATION_HOME", 1);
 
 	// -- Conexión a la DB
 

@@ -7,4 +7,10 @@
 
 	define("TABLA_VIAJES", "viaje");
 	define("TABLA_USUARIOS", "usuario");
+
+
+	define("RELATIVE_URL", "/panta/api/");
+	define("ABSOLUTE_URL", "http://localhost/PantaAPI/api/");
+
+	define("PICS_URL", "http://localhost/PantaAPI/fotos/");
 ?>
