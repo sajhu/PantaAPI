@@ -23,13 +23,13 @@ include "settings.php";
 	$clave = get("clave"); 
 
 	if(!$nombre || $nombre == "")
-		error(MISSING_PARAMS, 'description'); // muere
+		error(MISSING_PARAMS, 'nombre'); // muere
 
 	else if(!$user || $user == "")
-		error(MISSING_PARAMS, 'to');
+		error(MISSING_PARAMS, 'usuario');
 
 	else if(!$clave || $clave == "")
-		error(MISSING_PARAMS, 'time'); // muere
+		error(MISSING_PARAMS, 'clave'); // muere
 
 
 	// POR DEFECTO
