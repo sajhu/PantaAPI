@@ -56,7 +56,7 @@ include "settings.php";
 
 
 	$sql = "INSERT INTO `".TABLA_USUARIOS."` (`codigo`, `nombre`, `apellido`, `correo`, `foto`, `telefono`, `placa`, `pasajeros`, `viajes`, `clave`) 
-	VALUES (NULL, '".$nombre."', '".$apellido."', '".$correo."', '', '".$telefono."', '', '0', '0', '".$clave."');";
+	VALUES (NULL, '".$nombre."', '".$apellido."', '".$user."', '', '".$telefono."', '', '0', '0', '".$clave."');";
 	
 	$DB->ExecuteSQL($sql) or error(PROBLEM_PUBLISHING, $DB->lastError);
 
