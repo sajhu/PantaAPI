@@ -7,7 +7,7 @@ class Error {
 	
 	private $nombres;
 	
-	public function __construct($id)
+	public function __construct($id, $info = "")
 	{
 		$this->response = $id;
 		
@@ -27,6 +27,10 @@ class Error {
 
 			$this->description =  $this->nombres[$id];
 
+		if($info != "")
+		{
+			$this->appendInfo($info);
+		}
 	}
 
 	public function appendInfo($info)

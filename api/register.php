@@ -2,12 +2,13 @@
 // Codificación JSON
 header('Content-Type: application/json; charset=utf8');
 
-
+define("REQUIRE_AUTH", false);
 include "settings.php";
 
 //include "functions.php";
 
-	
+
+
 
 
 // ---------------------------
@@ -16,11 +17,15 @@ include "settings.php";
 
 	// CAMPOS OBLIGATORIOS
 
-	$nombre = get("nombre") or error(MISSING_PARAMS, 'description');
+	$nombre = get("name") or error(MISSING_PARAMS, 'name');
+	
+	$apellido = get("surname") or error(MISSING_PARAMS, 'surname');
 
-	$user = get("user");
+	$user = get("userId") or error(MISSING_PARAMS, 'userId');
 
-	$clave = get("clave"); 
+	$telefono = get("phone") or error(MISSING_PARAMS, 'phone');
+
+	$clave = get("clave") or error(MISSING_PARAMS, 'clave'); 
 
 	if(!$nombre || $nombre == "")
 		error(MISSING_PARAMS, 'nombre'); // muere
@@ -30,63 +35,28 @@ include "settings.php";
 
 	else if(!$clave || $clave == "")
 		error(MISSING_PARAMS, 'clave'); // muere
-
+	
+	else if(!$telefono || $telefono == "")
+		error(MISSING_PARAMS, 'telefono'); // muere
 
 	// POR DEFECTO
 
-	$fecha = "CURDATE( )"; // si se cambia hay que agregar \'
+	$fecha = "CURDATE()"; // si se cambia hay que agregar \'
 
-	$sillas = 0;
 
-	// OPCIONALES
-
-	$pfecha = get("date");
-	if($pfecha || $pfecha != "")
-		$usaFecha = true;
-		
-	$psillas = get("seats");
-	if($psillas || $psillas != "")
-		$sillas = $psillas;	
 		
 // ---------------------------
 // VALIDACIÓN DE CAMPOS
 // ---------------------------
 
-	if (strlen($hora) != 4)
-		error(ERROR_VALIDATING);
-	
 
-	if($to != DESTINATION_UNIANDES && $to != DESTINATION_HOME)
-	{
-		var_dump($_GET);
-				error(ERROR_VALIDATING, 'destination param \'to\'');
-
-	}
-
-	if($usaFecha)
-	{
-		if($pfecha == 'today')
-			$fecha = "CURDATE( )";
-		elseif ($pfecha == 'tomorrow')
-			$fecha = "DATE_ADD(NOW(), INTERVAL 1 DAY)";
-		elseif ($pfecha == 'both') // ESTO SE SOPORTA EN DAR LISTA DE VIAJES, NO PUBLICAR
-			error(NOT_SUPPORTED);
-		//elseif ($pfecha) mira el patron de fecha yyyy/mm/dd
-		else
-			error(ERROR_VALIDATING);
-	}
-	
-		
-	if(!is_numeric($sillas) || $sillas > 7)
-		error(ERROR_VALIDATING);
-		
-		
 // ---------------------------
 // CONSULTA SQL
 // ---------------------------
 
-	$sql = 'INSERT INTO `'.TABLA_VIAJES.'` (`id`, `descripcion`, `fecha`, `hora`, `sillas`, `id_conductor`, `destino`) VALUES (NULL, \''.$descripcion.'\', '.$fecha.', \''.$hora.'\', \''.$sillas.'\', \''.$codigo.'\', \''.$to.'\');';
 
+	$sql = "INSERT INTO `".TABLA_USUARIOS."` (`codigo`, `nombre`, `apellido`, `correo`, `foto`, `telefono`, `placa`, `pasajeros`, `viajes`, `clave`) 
+	VALUES (NULL, '".$nombre."', '".$apellido."', '".$correo."', '', '".$telefono."', '', '0', '0', '".$clave."');";
 	
 	$DB->ExecuteSQL($sql) or error(PROBLEM_PUBLISHING, $DB->lastError);
 
