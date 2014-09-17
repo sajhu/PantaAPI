@@ -38,6 +38,9 @@ include "settings.php";
 
 	$sillas = 0;
 
+	$latitud = "NULL";
+	$longitud = "NULL";
+
 	// OPCIONALES
 
 	$pfecha = get("date");
@@ -48,6 +51,14 @@ include "settings.php";
 	if($psillas || $psillas != "")
 		$sillas = $psillas;	
 		
+	$platitud = get("latitud");
+	if($platitud && $platitud != "")
+		$latitud = $platitud;
+
+	$plongitud = get("longitud");
+	if($plongitud && $plongitud != "")
+		$longitud = $plongitud;	
+
 // ---------------------------
 // VALIDACIÓN DE CAMPOS
 // ---------------------------
@@ -78,14 +89,19 @@ include "settings.php";
 	
 		
 	if(!is_numeric($sillas) || $sillas > 7)
-		error(ERROR_VALIDATING);
+		error(ERROR_VALIDATING, "sillas");
 		
+	if($latitud && !is_numeric($latitud))
+		error(ERROR_VALIDATING, "latitud");	
+
+	if($longitud && !is_numeric($longitud))
+		error(ERROR_VALIDATING, "longitud");
 		
 // ---------------------------
 // CONSULTA SQL
 // ---------------------------
 
-	$sql = 'INSERT INTO `'.TABLA_VIAJES.'` (`id`, `descripcion`, `fecha`, `hora`, `sillas`, `id_conductor`, `destino`) VALUES (NULL, \''.$descripcion.'\', '.$fecha.', \''.$hora.'\', \''.$sillas.'\', \''.$codigo.'\', \''.$to.'\');';
+	$sql = 'INSERT INTO `'.TABLA_VIAJES.'` (`id`, `descripcion`, `fecha`, `hora`, `sillas`, `id_conductor`, `destino`, `latitud`, `longitud`) VALUES (NULL, \''.$descripcion.'\', '.$fecha.', \''.$hora.'\', \''.$sillas.'\', \''.$codigo.'\', \''.$to.'\', \''.$latitud.'\', \''.$longitud.'\');';
 
 	
 	$DB->ExecuteSQL($sql) or error(PROBLEM_PUBLISHING, $DB->lastError);

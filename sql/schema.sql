@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `clave` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `correo` (`correo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -63,7 +63,9 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 
 INSERT INTO `usuario` (`codigo`, `nombre`, `apellido`, `correo`, `foto`, `telefono`, `placa`, `pasajeros`, `viajes`, `clave`) VALUES
 (1, 'Jorge', 'Hernandez', 'ja.hernandez13', '1.png', 2147483647, 'RBQ388', 0, 0, 'mexico'),
-(2, 'Santiago', 'Rojas', 's.rojas963', '2.png', 2147483647, 'VZZ203', 0, 0, '123456789');
+(2, 'Santiago', 'Rojas', 's.rojas963', '2.png', 2147483647, 'VZZ203', 0, 0, '123456789'),
+(3, 'Daniel', 'Hernandez', 'da.hernandez551', '3.png', 3112204711, '', 0, 0, 'boleta'),
+(4, 'Daniel', 'Hernandez', '', '', 3112204711, '', 0, 0, 'boleta');
 
 -- --------------------------------------------------------
 

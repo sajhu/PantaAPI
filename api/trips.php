@@ -93,9 +93,11 @@ include "settings.php";
 		$to = $viaje['destino'];
 		$fecha = $viaje['fecha'];
 		$hora = $viaje['hora'];
+		$lat = $viaje['latitud'];
+		$lon = $viaje['longitud'];
 		$sillas = $viaje['sillas'];
 
-		$trip = new Trip($viajeId, $descripcion, $to, $fecha, $hora, $sillas);
+		$trip = new Trip($viajeId, $descripcion, $to, $fecha, $hora, $sillas, $lat, $lon);
 
 		$codigo = $viaje['codigo'];
 		$nombre = $viaje['nombre'];
